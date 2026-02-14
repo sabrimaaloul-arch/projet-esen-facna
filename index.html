@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESEN Career - Étudiants & Entreprises</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="logo-container">
+                <!-- ESEN Career text only -->
+                <div class="logo-text">
+                    <div class="logo-esen">ESEN</div>
+                    <div class="logo-career">Career</div>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Accueil</a></li>
+                <li><a href="#students">Étudiants</a></li>
+                <li><a href="#offers">Offres</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#" id="navConnexion">Connexion</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h2>Connectez étudiants et entreprises</h2>
+                <p>Plateforme officielle de l'ESEN Manouba pour stages, emplois et collaborations</p>
+                <div class="buttons">
+                    <button class="btn" id="studentBtn">Je suis étudiant</button>
+                    <button class="btn" id="companyBtn">Je suis entreprise</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Students Section -->
+        <section id="students" class="section">
+            <h2>Profils Étudiants</h2>
+            <div class="profiles-media">
+                <!-- Student profiles will be added dynamically by JavaScript -->
+            </div>
+            <button class="btn auth-student auth-hidden" id="addProfileBtn">Ajouter mon profil</button>
+        </section>
+
+        <!-- Job Offers Section -->
+        <section id="offers" class="section">
+            <h2>Offres Récentes</h2>
+            <div class="offers-container">
+                <!-- Job offers will be added dynamically by JavaScript -->
+            </div>
+            <div class="form-container" id="offerFormContainer">
+                <h3>Poster une offre</h3>
+                <form id="jobOfferForm">
+                    <input type="text" id="offerTitle" placeholder="Titre de l'offre" required>
+                    <input type="text" id="offerCompany" placeholder="Nom de l'entreprise" required>
+                    <textarea id="offerDescription" placeholder="Description de l'offre" rows="3" required></textarea>
+                    <select id="offerType" required>
+                        <option value="">Type d'offre</option>
+                        <option value="stage">Stage</option>
+                        <option value="emploi">Emploi</option>
+                        <option value="alternance">Alternance</option>
+                    </select>
+                    <button type="submit" class="btn">Publier l'offre</button>
+                    <button type="button" class="btn cancel" id="cancelOfferBtn">Annuler</button>
+                </form>
+            </div>
+            <button class="btn auth-company auth-hidden" id="postOfferBtn">Poster une nouvelle offre</button>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <h2>Contact ESEN</h2>
+            <div class="contact-info">
+                <p><i class="fas fa-map-marker-alt"></i> manouba</p>
+                <p><i class="fas fa-phone"></i> +216 70 125 189</p>
+                <p><i class="fas fa-envelope"></i> Email: find.job@esen.tn</p>
+            </div>
+        </section>
+
+        <!-- Student Login Modal -->
+        <div class="modal" id="studentLoginModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Connexion Étudiant</h2>
+                <form id="studentLoginForm">
+                    <input type="email" id="studentEmail" placeholder="Email (@esen.tn)" required>
+                    <input type="password" id="studentPassword" placeholder="Mot de passe" required>
+                    <button type="submit" class="btn">Se connecter</button>
+                </form>
+                <p class="modal-link">Pas de compte? <a href="#" id="switchToStudentSignup">S'inscrire ici</a></p>
+            </div>
+        </div>
+
+        <!-- Student Signup Modal -->
+        <div class="modal" id="studentSignupModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Créer un compte Étudiant</h2>
+                <form id="studentSignupForm">
+                    <input type="email" id="signupStudentEmail" placeholder="Email (@esen.tn)" required>
+                    <input type="password" id="signupStudentPassword" placeholder="Mot de passe" required>
+                    <input type="password" id="signupStudentConfirmPassword" placeholder="Confirmer le mot de passe" required>
+                    <button type="submit" class="btn">S'inscrire</button>
+                </form>
+                <p class="modal-link">Vous avez un compte? <a href="#" id="switchToStudentLogin">Se connecter ici</a></p>
+            </div>
+        </div>
+
+        <!-- Enterprise Login Modal -->
+        <div class="modal" id="companyLoginModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Connexion Entreprise</h2>
+                <form id="companyLoginForm">
+                    <input type="email" id="companyEmail" placeholder="Email" required>
+                    <input type="password" id="companyPassword" placeholder="Mot de passe" required>
+                    <button type="submit" class="btn">Se connecter</button>
+                </form>
+                <p class="modal-link">Pas de compte? <a href="#" id="switchToCompanySignup">S'inscrire ici</a></p>
+            </div>
+        </div>
+
+        <!-- Enterprise Signup Modal -->
+        <div class="modal" id="companySignupModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Créer un compte Entreprise</h2>
+                <form id="companySignupForm">
+                    <input type="text" id="companyName" placeholder="Nom de l'entreprise" required>
+                    <input type="email" id="signupCompanyEmail" placeholder="Email" required>
+                    <input type="password" id="signupCompanyPassword" placeholder="Mot de passe" required>
+                    <input type="password" id="signupCompanyConfirmPassword" placeholder="Confirmer le mot de passe" required>
+                    <button type="submit" class="btn">S'inscrire</button>
+                </form>
+                <p class="modal-link">Vous avez un compte? <a href="#" id="switchToCompanyLogin">Se connecter ici</a></p>
+            </div>
+        </div>
+
+        <!-- Login Choice Modal -->
+        <div class="modal" id="loginChoiceModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Choisir le type de connexion</h2>
+                <div class="login-choice-buttons">
+                    <button class="btn btn-large" id="chooseStudentLogin">Je suis Étudiant</button>
+                    <button class="btn btn-large" id="chooseCompanyLogin">Je suis Entreprise</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Student Profile Menu Modal -->
+        <div class="modal" id="profileMenuModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Mon Profil</h2>
+                <div class="profile-menu-buttons">
+                    <button class="btn btn-large" id="createOrModifyProfileBtn">Créer mon profil</button>
+                    <button class="btn btn-large btn-danger" id="logoutBtn">Déconnexion</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Student Profile Modal -->
+        <div class="modal" id="profileModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="profileFormHeading">Créer mon profil étudiant</h2>
+                <form id="profileForm">
+                    <input type="text" id="studentName" placeholder="Nom complet" required>
+                    <input type="text" id="studentSpecialty" placeholder="Spécialité" required>
+                    <input type="url" id="linkedin" placeholder="Lien LinkedIn">
+                    <input type="text" id="cv" placeholder="Lien vers CV">
+                    <textarea id="studentDescription" placeholder="Description et compétences" rows="4" required></textarea>
+                    <button type="submit" class="btn">Créer mon profil</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Admin Login Modal -->
+        <div class="modal" id="adminLoginModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Admin Access</h2>
+                <form id="adminLoginForm">
+                    <input type="password" id="adminCode" placeholder="Enter admin code" required>
+                    <button type="submit" class="btn">Valider</button>
+                </form>
+                <p id="adminErrorMsg" style="color: red; display: none;">Code incorrect</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <!-- ESEN Career text only in footer -->
+                <div class="footer-logo-text">
+                    <div class="footer-esen">ESEN</div>
+                    <div class="footer-career">Career</div>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Liens rapides</h4>
+                <a href="#home">Accueil</a>
+                <a href="#students">Étudiants</a>
+                <a href="#offers">Offres</a>
+            </div>
+            <div class="footer-social">
+                <h4>Suivez-nous</h4>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/esenien/"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=true&heroEntityKey=urn%3Ali%3Aorganization%3A18569041&keywords=ecole%20sup%C3%A9rieure%20d%27economie%20num%C3%A9rique%20manouba&origin=RICH_QUERY_SUGGESTION&position=0&searchId=243aa6c1-c808-422e-9dbe-5fe4e0867d6b&sid=z_g&spellCorrectionEnabled=false"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://esen.rnu.tn/portail/"><i class="fas fa-globe"></i></a>
+                </div>
+            </div>
+        </div>
+        <p class="copyright">© 2026 ESEN Career - Tous droits réservés <button class="btn-admin" id="adminBtn"><i class="fas fa-cog"></i></button></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
